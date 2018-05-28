@@ -49,7 +49,7 @@ dependencies {
     // Anko SQLite
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
     implementation 'com.android.support:design:27.1.1'
-    implementation files('libs/BaiduLBS_Android.jar')
+
     implementation files('libs/mysql-connector-java-5.1.45-bin.jar')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
