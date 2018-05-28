@@ -22,8 +22,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.jetbrains.anko.support.v4.toast
 import android.content.Context.VIBRATOR_SERVICE
+import android.content.Intent
 import android.os.Vibrator
 import com.example.sun.fingershuttle.R.id.*
+import com.example.sun.fingershuttle.message.MessageActivity
 import org.jetbrains.anko.*
 
 
@@ -167,7 +169,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId){
-            R.id.menu_message -> toast("点击了信息菜单")
+            R.id.menu_message -> {
+                val intent= Intent(this,MessageActivity::class.java)
+                startActivity(intent)
+            }
             R.id.menu_setting -> toast("点击了个人菜单")
         }
 
