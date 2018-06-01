@@ -119,11 +119,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         navi.menu.getItem(1).setChecked(true)
                         toolbar.setTitle("地图")
                         toolbar.setTitleTextColor(0xFF3F81D9.toInt())
-                        window.statusBarColor = getColor(R.color.colorHalfTransparency)
+                        window.statusBarColor = 0x62ffffff
                     }
                     2 -> {
                         navi.menu.getItem(2).setChecked(true)
-                        toolbar.setTitle("设置")
+                        toolbar.title = "设置"
                         toolbar.setTitleTextColor(Color.WHITE)
                         window.statusBarColor = Color.TRANSPARENT
                     }
@@ -152,15 +152,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when(viewPager.currentItem){
             0 -> {
                 menu!!.findItem(menu_message).setVisible(true)
-                menu!!.findItem(menu_setting).setVisible(false)
+                menu.findItem(menu_setting).setVisible(false)
             }
             1 -> {
                 menu!!.findItem(menu_message).setVisible(false)
-                menu!!.findItem(menu_setting).setVisible(false)
+                menu.findItem(menu_setting).setVisible(false)
             }
             2 -> {
                 menu!!.findItem(menu_message).setVisible(false)
-                menu!!.findItem(menu_setting).setVisible(true)
+                menu.findItem(menu_setting).setVisible(true)
             }
         }
 
