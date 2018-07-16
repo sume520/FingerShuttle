@@ -4,10 +4,27 @@
         android:id="@+id/item_home"
         android:title="@string/title_home"
         android:icon="@drawable/navi_home_selector"/>
+    <!--
     <item
         android:id="@+id/item_map"
         android:title="@string/title_map"
         android:icon="@drawable/navi_map_selector"/>
+        !-->
+    <item
+        android:id="@+id/item_monitor"
+        android:title="实时监控"
+        android:icon="@drawable/ic_monitor_white_24dp" />
+
+    <item
+        android:id="@+id/item_user"
+        android:icon="@drawable/ic_person_white_24dp"
+        android:title="用户" />
+
+    <item
+        android:id="@+id/item_help"
+        android:title="帮助"
+        android:icon="@drawable/ic_help_white_24dp" />
+
     <item
         android:id="@+id/item_setting"
         android:title="@string/title_setting"

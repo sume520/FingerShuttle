@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".com.fragments.Fragment_User">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户信息"
+            android:textSize="24dp"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示用户信息"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="骑程"
+            android:textSize="24dp"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总行程"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查找行程"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备忘录"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定位"
+            android:textColor="#ffffff"
+            android:textSize="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户当前所在位置"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户车辆所在位置"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导航路线"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="指梭附近维修点及升级点"
+            android:textSize="16dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+
+
+</ScrollView>
