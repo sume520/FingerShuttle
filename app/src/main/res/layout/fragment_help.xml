@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".com.fragments.Fragment_Help">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <Button
+        android:id="@+id/security_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="指梭安全中心"/>
+
+    <Button
+        android:id="@+id/custom_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="客服"/>
+
+    <Button
+        android:id="@+id/urgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="紧急处理"/>
+
+</LinearLayout>
