@@ -4,18 +4,22 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import com.example.sun.fingershuttle.DBTable.User
 import com.example.sun.fingershuttle.R.id.menu_message
 import com.example.sun.fingershuttle.com.fragments.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.toast
+import org.litepal.LitePal
+import org.litepal.extension.find
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,7 +38,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        var db = LitePal.getDatabase()
+        Log.d("MainAcrivity", db.isDatabaseIntegrityOk.toString())
+        insertUserDB()
         init()
+    }
+
+    private fun insertUserDB() {
+        var user: User
+        if (LitePal.where("name like ?", "sume520").find<User>().first() == null) {
+            user = User("sume520", '男', "13189814490", "abc123")
+            user.save()
+            Log.d("insertUserDB", "插入数据成功")
+        } else {
+            Log.d("insertUserDB", "数据已存在")
+        }
+
     }
 
     override fun onClick(v: View?) {
@@ -205,6 +224,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter.addFragment(Fragment_Settings.newInstance())
         viewPager.adapter = adapter
     }
-
 
 }

@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".com.fragments.Fragment_FingerPrint">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/bt_open_fingerprint_lock"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="打开指纹解锁" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/bt_close_fingerprint_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关闭指纹解锁" />
+
+    <Button
+        android:id="@+id/bt_add_finger_print"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加指纹" />
+
+    <Button
+        android:id="@+id/bt_delete_finger_print"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除指纹" />
+
+</LinearLayout>

@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".com.fragments.Fragment_Security">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/bt_find_password"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="指梭安全中心" />
+        android:layout_height="wrap_content"
+        android:text="找回密码" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/bt_modify_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改密码" />
+
+    <Button
+        android:id="@+id/bt_dearchive_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="解封账号" />
+
+    <Button
+        android:id="@+id/bt_delete_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注销账号" />
+
+</LinearLayout>

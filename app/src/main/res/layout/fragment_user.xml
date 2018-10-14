@@ -21,32 +21,29 @@
             android:textSize="24dp"
             android:textColor="#ffffff" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="登录"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="登录" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_logout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="注册"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="注销" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="显示用户信息"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="注册" />
+
+        <Button
+            android:id="@+id/bt_show_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="显示用户信息" />
 
         <View
             android:layout_width="match_parent"
@@ -59,32 +56,23 @@
             android:textSize="24dp"
             android:textColor="#ffffff"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_total_ditance"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="总行程"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="总行程" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_find_path"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="查找行程"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="查找行程" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_note"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="备忘录"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="备忘录" />
 
         <View
             android:layout_width="match_parent"
@@ -97,44 +85,31 @@
             android:textColor="#ffffff"
             android:textSize="24dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_user_current_location"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="用户当前所在位置"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="用户当前所在位置" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_bike_current_location"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="用户车辆所在位置"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="用户车辆所在位置" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="导航路线"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:text="导航路线" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/bt_repair_update"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="指梭附近维修点及升级点"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:textColor="#ffffff"
-            android:clickable="true"/>
+            android:layout_marginBottom="45dp" />
 
     </LinearLayout>
-
-
 
 </ScrollView>

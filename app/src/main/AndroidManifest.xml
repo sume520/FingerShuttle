@@ -24,6 +24,7 @@
 
     <application
         android:allowBackup="true"
+        android:name="org.litepal.LitePalApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -44,7 +45,8 @@
             android:name=".message.MessageActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".HelppingActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".UserActivity"></activity>
     </application>
 
 </manifest>

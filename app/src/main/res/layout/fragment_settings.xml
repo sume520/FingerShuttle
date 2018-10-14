@@ -12,36 +12,43 @@
         android:layout_height="?attr/actionBarSize"/>
 
     <Button
+        android:id="@+id/finger_print"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="指纹设置"/>
 
     <Button
+        android:id="@+id/acount_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="账号信息与安全"/>
 
     <Button
+        android:id="@+id/help_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="帮助"/>
 
     <Button
+        android:id="@+id/connect_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="连接设置"/>
     
     <Button
+        android:id="@+id/display_sound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="显示和音效设置"/>
 
     <Button
+        android:id="@+id/product_detection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="产品检测"/>
 
     <Button
+        android:id="@+id/about_fingershuttle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="关于指梭"/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  

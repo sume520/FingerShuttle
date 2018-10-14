@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="Inno" />
+
+    <version value="2" />
+
+    <list>
+        <mapping class="com.example.sun.fingershuttle.DBTable.User" />
+        <mapping class="com.example.sun.fingershuttle.DBTable.LoginedInfo" />
+    </list>
+
+</litepal>

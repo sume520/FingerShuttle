@@ -3,9 +3,7 @@ package com.example.sun.fingershuttle
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.example.sun.fingershuttle.com.fragments.Fragment_CustomSevice
-import com.example.sun.fingershuttle.com.fragments.Fragment_Emergency_handling
-import com.example.sun.fingershuttle.com.fragments.Fragment_Security
+import com.example.sun.fingershuttle.com.fragments.*
 
 class SettingActivity : AppCompatActivity() {
 
@@ -21,18 +19,18 @@ class SettingActivity : AppCompatActivity() {
     private fun replaceFragment(name:String){
         var fragment: Fragment?=null
         when(name){
-            "fingerprint"->fragment= Fragment_Security.newInstance()
-            "acount_inform_security"->fragment= Fragment_CustomSevice.newInstance()
-            "help"->fragment= Fragment_Emergency_handling.newInstance()
-            "connect" -> null
-            "display_and_sound"->null
-            "product_detection"->null
-            "about"->null
+            "fingerprint" -> fragment = Fragment_FingerPrint.newInstance()
+            "acount" -> fragment = FragmentAcount.newInstance()
+            "help" -> fragment = FragmentSettingHelp.newInstance()
+            "connect" -> fragment = FragmentConnect.newInstance()
+            "display_and_sound" -> fragment = FragmentDisplayAndSound.newInstance()
+            "product_detection" -> fragment = FragmentProductDetection.newInstance()
+            "about" -> fragment = FragmentAbout.newInstance()
         }
         val fragmentManager=supportFragmentManager
         val fragmentTransaction=fragmentManager.beginTransaction()
         if (fragment!=null) {
-            fragmentTransaction.replace(R.id.help_frag,fragment)
+            fragmentTransaction.replace(R.id.setting_frag, fragment)
         }
         fragmentTransaction.commit()
     }

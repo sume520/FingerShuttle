@@ -49,10 +49,8 @@ dependencies {
     // Anko SQLite
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
     implementation 'com.android.support:design:27.1.1'
-
     implementation files('libs/mysql-connector-java-5.1.45-bin.jar')
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //高德地图
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //2D地图so及jar
@@ -61,6 +59,7 @@ dependencies {
     implementation 'com.amap.api:location:latest.integration'
     //导航功能
     implementation 'com.amap.api:navi-3dmap:latest.integration'
-
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'org.litepal.android:kotlin:3.0.0'
+    implementation files('libs/slf4j-simple-1.7.25-sources.jar')
 }

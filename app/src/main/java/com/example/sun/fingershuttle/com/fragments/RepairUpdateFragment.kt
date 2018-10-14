@@ -9,11 +9,15 @@ import android.view.ViewGroup
 
 import com.example.sun.fingershuttle.R
 
-class Fragment_FingerPrint : Fragment() {
+// TODO: Rename parameter arguments, choose names that match
+
+class RepairUpdateFragment : Fragment() {
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finger_print, container, false)
+        return inflater.inflate(R.layout.fragment_repair_update, container, false)
     }
 
 
@@ -21,7 +25,6 @@ class Fragment_FingerPrint : Fragment() {
 
         @JvmStatic
         fun newInstance() =
-                Fragment_FingerPrint()
-
+                RepairUpdateFragment()
     }
 }
