@@ -21,6 +21,7 @@
             android:textColor="#ffffff"
             android:text="电池电量: "/>
         <TextView
+            android:text="80%"
             android:id="@+id/monitor_tv_battery"
             android:layout_width="wrap_content"
             android:textColor="#ffffff"
@@ -38,6 +39,8 @@
             android:textColor="#ffffff"
             android:text="剩余行驶时间: "/>
         <TextView
+            android:text="4小时32分"
+            android:textColor="#ffffff"
             android:id="@+id/monitor_tv_remaind_drive_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -54,6 +57,7 @@
             android:textColor="#ffffff"
             android:text="信号强度: "/>
         <TextView
+            android:text="中等"
             android:id="@+id/monitor_tv_single"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,6 +83,7 @@
             android:textColor="#ffffff"
             android:text="开锁状态: "/>
         <TextView
+            android:text="已开锁"
             android:id="@+id/monitor_tv_lock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,6 +101,7 @@
             android:textColor="#ffffff"
             android:text="响铃状态: "/>
         <TextView
+            android:text="无响铃"
             android:id="@+id/monitor_tv_belt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,6 +119,7 @@
             android:layout_height="wrap_content"
             android:text="警报状态: "/>
         <TextView
+            android:text="已关闭"
             android:id="@+id/monitor_tv_alert"
             android:textColor="#ffffff"
             android:layout_width="wrap_content"
@@ -130,6 +137,7 @@
             android:textColor="#ffffff"
             android:text="抗拒状态: "/>
         <TextView
+            android:text="已关闭"
             android:id="@+id/monitor_tv_resist"
             android:textColor="#ffffff"
             android:layout_width="wrap_content"

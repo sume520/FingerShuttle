@@ -1,12 +1,8 @@
-package com.example.sun.fingershuttle
+package com.example.sun.fingershuttle.DBUtil
 
 import android.util.Log
-import android.view.View
 import com.example.sun.fingershuttle.DBTable.LoginedInfo
 import com.example.sun.fingershuttle.DBTable.User
-import com.example.sun.fingershuttle.DBUtil.DBHandler
-import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.coroutines.experimental.selects.select
 import org.litepal.LitePal
 import org.litepal.exceptions.LitePalSupportException
 import org.litepal.extension.deleteAll
@@ -14,7 +10,6 @@ import org.litepal.extension.find
 import org.litepal.extension.findAll
 import org.litepal.extension.findFirst
 import java.sql.ResultSet
-import kotlin.math.log
 
 object Login {
     private var rs: ResultSet? = null

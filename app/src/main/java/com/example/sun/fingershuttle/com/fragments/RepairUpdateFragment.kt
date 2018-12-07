@@ -9,8 +9,6 @@ import android.view.ViewGroup
 
 import com.example.sun.fingershuttle.R
 
-// TODO: Rename parameter arguments, choose names that match
-
 class RepairUpdateFragment : Fragment() {
 
 

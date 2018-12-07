@@ -1,9 +1,13 @@
 package com.example.sun.fingershuttle
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.transition.FragmentTransitionSupport
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -11,8 +15,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.example.sun.fingershuttle.DBTable.User
+import com.example.sun.fingershuttle.MinaUtil.ConnectUtil
 import com.example.sun.fingershuttle.R.id.menu_message
 import com.example.sun.fingershuttle.com.fragments.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var navi: BottomNavigationView
     private lateinit var toolbar: Toolbar
     private lateinit var viewPager: ViewPager
-    private var is_buzz_on = false
+    private var is_ring_on = false
     private var is_lock_on = false
     private var is_light_on = false
     private var is_resist_on = false
@@ -40,32 +44,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(toolbar)
         var db = LitePal.getDatabase()
         Log.d("MainAcrivity", db.isDatabaseIntegrityOk.toString())
-        insertUserDB()
         init()
-    }
-
-    private fun insertUserDB() {
-        var user: User
-        if (LitePal.where("name like ?", "sume520").find<User>().first() == null) {
-            user = User("sume520", '男', "13189814490", "abc123")
-            user.save()
-            Log.d("insertUserDB", "插入数据成功")
-        } else {
-            Log.d("insertUserDB", "数据已存在")
-        }
-
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.btn_buzz -> {
-                if (!is_buzz_on) {
-                    btn_buzz.imageResource = R.drawable.ic_buzz_on_24dp
-                    is_buzz_on = true
+            R.id.btn_ring -> {
+                if (!is_ring_on) {
+                    btn_ring.imageResource = R.drawable.ic_buzz_on_24dp
+                    is_ring_on = true
                     toast("开启鸣笛")
                 } else {
-                    btn_buzz.imageResource = R.drawable.ic_buzz_off_24dp
-                    is_buzz_on = false
+                    btn_ring.imageResource = R.drawable.ic_buzz_off_24dp
+                    is_ring_on = false
                     toast("关闭鸣笛")
                 }
             }
@@ -113,7 +104,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             decorView.systemUiVisibility = option
             window.statusBarColor = Color.TRANSPARENT
         }
+        setViewPager()
+        ConnectUtil.connect()
+    }
 
+
+    private fun setViewPager(){
         viewPager = findViewById(R.id.viewpager)
         navi = findViewById(R.id.btn_navi_view)
         navi.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
@@ -208,6 +204,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.menu_message -> {
+                var intent= Intent(this,SettingActivity::class.java)
+                intent.putExtra("name","message")
+                startActivity(intent)
             }
         }
 
@@ -224,5 +223,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter.addFragment(Fragment_Settings.newInstance())
         viewPager.adapter = adapter
     }
-
 }

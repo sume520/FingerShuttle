@@ -39,7 +39,6 @@ object DBUtil {
             stmt.executeQuery(sql)
             Log.w("", "101")
         } catch (e: SQLException) {
-            // TODO Auto-generated catch block
             //e.printStackTrace()
             Log.e("DBUtil", "数据库查询异常")
         }

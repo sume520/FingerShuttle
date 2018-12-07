@@ -2,18 +2,13 @@ package com.example.sun.fingershuttle.com.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sun.fingershuttle.Login
+import com.example.sun.fingershuttle.MinaUtil.SessionManager
 import com.example.sun.fingershuttle.R
-import com.example.sun.fingershuttle.R.id.btn_buzz
+import com.example.sun.fingershuttle.R.id.menu_message
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.support.v4.toast
-import kotlin.math.log
 
 class Fragment_Home : Fragment(){
 
@@ -33,4 +28,13 @@ class Fragment_Home : Fragment(){
                 Fragment_Home()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        btn_ring.setOnClickListener {
+            //ConnectUtil.sendMsg("#ring")
+            SessionManager.writeMsg("#ring")
+        }
+
+
+    }
 }

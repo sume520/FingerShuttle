@@ -26,6 +26,7 @@ class SettingActivity : AppCompatActivity() {
             "display_and_sound" -> fragment = FragmentDisplayAndSound.newInstance()
             "product_detection" -> fragment = FragmentProductDetection.newInstance()
             "about" -> fragment = FragmentAbout.newInstance()
+            "message"->fragment= FragmentMessage.newInstance()
         }
         val fragmentManager=supportFragmentManager
         val fragmentTransaction=fragmentManager.beginTransaction()

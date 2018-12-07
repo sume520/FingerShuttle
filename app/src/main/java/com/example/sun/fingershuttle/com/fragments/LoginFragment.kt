@@ -4,23 +4,16 @@ package com.example.sun.fingershuttle.com.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.sun.fingershuttle.DBTable.LoginedInfo
-import com.example.sun.fingershuttle.Login
+import com.example.sun.fingershuttle.DBUtil.Login
 
 import com.example.sun.fingershuttle.R
 import com.example.sun.fingershuttle.UserActivity
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_user.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
-import org.litepal.LitePal
-import org.litepal.extension.findAll
 
 class LoginFragment : Fragment() {
 
