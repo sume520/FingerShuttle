@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sun.fingershuttle.DBUtil.Login
+import com.example.sun.fingershuttle.login.Login
 
 import com.example.sun.fingershuttle.R
 import com.example.sun.fingershuttle.UserActivity

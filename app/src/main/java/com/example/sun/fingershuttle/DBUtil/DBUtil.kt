@@ -18,12 +18,12 @@ object DBUtil {
     private var stmt: Statement? = null
 
 //    init {
-//        con=DBConnect.getConnection(username,pwd, database)
+//        con=DBConnect.getConnection(username,password, database)
 //    }
 
     internal fun execQuerySql(sql: String): ResultSet? {
         val rs: ResultSet? = null
-        var stmt: Statement? = null
+        var stmt: Statement?
 
         try {
             if (con == null || con!!.isClosed) {

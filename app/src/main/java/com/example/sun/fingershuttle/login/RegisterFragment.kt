@@ -1,4 +1,4 @@
-package com.example.sun.fingershuttle.com.fragments
+package com.example.sun.fingershuttle.login
 
 
 import android.os.Bundle
@@ -30,7 +30,7 @@ class RegisterFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        register_bt_reg.setOnClickListener {
+       /* register_bt_reg.setOnClickListener {
             var name = register_et_acount.text.toString()
             var pwd = register_et_password.text.toString()
             var rePwd = register_repeat_password.text.toString()
@@ -59,6 +59,6 @@ class RegisterFragment : Fragment() {
                     rb_woman.isChecked = false
                 } else toast("注册失败,账号已存在")
             }
-        }
+        }*/
     }
 }

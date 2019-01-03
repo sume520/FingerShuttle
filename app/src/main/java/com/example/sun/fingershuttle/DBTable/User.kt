@@ -5,8 +5,14 @@ import org.litepal.crud.LitePalSupport
 
 data class User(
         @Column(unique = true, defaultValue = "unknown")
+        var account:String,
+        var password: String,
         var name: String,
         var sex: Char,
-        var phonenumber: String,
-        var pwd: String
-) : LitePalSupport()
+        var phonenumber: String
+        ) : LitePalSupport(){
+    override fun toString(): String {
+        println("name ")
+        return super.toString()
+    }
+}

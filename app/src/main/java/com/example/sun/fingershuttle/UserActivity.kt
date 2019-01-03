@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.sun.fingershuttle.com.fragments.*
+import com.example.sun.fingershuttle.login.LoginFragment
+import com.example.sun.fingershuttle.login.RegisterFragment
 
 class UserActivity : AppCompatActivity() {
 

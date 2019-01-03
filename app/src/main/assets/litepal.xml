@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="Inno" />
 
-    <version value="2" />
+    <version value="3" />
 
     <list>
         <mapping class="com.example.sun.fingershuttle.DBTable.User" />

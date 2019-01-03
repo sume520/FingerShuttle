@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sun.fingershuttle.DBTable.LoginedInfo
-import com.example.sun.fingershuttle.DBUtil.Login
+import com.example.sun.fingershuttle.login.Login
 
 import com.example.sun.fingershuttle.R
 import kotlinx.android.synthetic.main.fragment_show_user_info.*
