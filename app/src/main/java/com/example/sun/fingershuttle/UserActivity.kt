@@ -14,6 +14,7 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         val intent = intent
         var name = intent.getStringExtra("name")
+        if(name==null) name="login"
         replaceFragment(name)
     }
 
@@ -38,4 +39,6 @@ class UserActivity : AppCompatActivity() {
         }
         fragmentTransaction.commit()
     }
+
+
 }

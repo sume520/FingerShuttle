@@ -30,7 +30,7 @@ class Fragment_User : Fragment() {
                 Fragment_User()
     }
 
-    private fun isLogined() {
+    /*private fun isLogined() {
         if (Login.isLogined()) {
             bt_login.visibility = View.GONE
             bt_logout.visibility = View.VISIBLE
@@ -39,17 +39,17 @@ class Fragment_User : Fragment() {
             bt_logout.visibility = View.GONE
         }
         view!!.invalidate()
-    }
+    }*/
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        isLogined()
+        //isLogined()
 
-        bt_login.setOnClickListener {
+        /*bt_login.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             intent.putExtra("name", "login")
             startActivity(intent)
-        }
+        }*/
         bt_register.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             intent.putExtra("name", "register")
@@ -102,9 +102,11 @@ class Fragment_User : Fragment() {
                     .setPositiveButton("确定") { _, _ ->
                         if (Login.logout()) {
                             toast("注销成功")
-                            view!!.invalidate()
+                            val intent=Intent(activity,UserActivity::class.java)
+                            intent.putExtra("name","login")
+                            startActivity(intent)
+                            activity!!.finish()
                         } else toast("注销失败")
-                        view!!.invalidate()
                     }
                     .setNegativeButton("取消", null)
                     .create()

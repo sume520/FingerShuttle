@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.sun.fingershuttle.DBTable.LoginedInfo
 import com.example.sun.fingershuttle.DBTable.User
+import com.example.sun.fingershuttle.MainActivity
 import com.example.sun.fingershuttle.R
-import com.example.sun.fingershuttle.UserActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.greenrobot.eventbus.EventBus
@@ -30,7 +30,7 @@ import java.net.URL
 
 class LoginFragment : Fragment() {
 
-    private var json=""
+    private var json = ""
     private val handler = Handler(Handler.Callback { msg ->
         var message = msg!!.obj as String
         json = message
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         Log.d("Login", "login")
         // Inflate the layout for this fragment
-        isLogined()
+
         EventBus.getDefault().register(this)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -56,12 +56,17 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if (isLogined()) {//判断是否登录，若已经登录则跳过登录界面
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            activity!!.finish()
+        }
         var account: String
         var password: String
         login_bt_login.setOnClickListener {
             account = et_acount.text.toString()
             password = et_password.text.toString()
-            if(isLogined()){
+            if (isLogined()) {
                 toast("已登录")
                 activity!!.finish()
             }
@@ -82,34 +87,36 @@ class LoginFragment : Fragment() {
                 et_password.text.clear()
                 toast("登录失败，请检查账号或密码")
             }*/
-            EventBus.getDefault().post(MessageEvent(account,password))
+            EventBus.getDefault().post(MessageEvent(account, password))
         }
     }
 
     @Subscribe(threadMode = ThreadMode.ASYNC)
-    fun Login(messageEvent: MessageEvent){
-        var account=messageEvent.account
-        var password=messageEvent.password
+    fun Login(messageEvent: MessageEvent) {
+        var account = messageEvent.account
+        var password = messageEvent.password
         var url = "http://120.78.159.172:8008/Login_RegServer/Login?account=$account&password=$password"
-        var json= URL(url).readText()
+        var json = URL(url).readText()
 
-        Log.d("Login",json)
-        if(!loginCheck(password,json)){
-            handler.post {
+        Log.d("Login", json)
+        if (!loginCheck(password, json)) {
+            //handler.post {
                 toast("登录失败，请检查账号密码")
                 et_password.text.clear()
-            }
-        }else{
-            handler.post{ toast("登录成功")
-                val intent = Intent(activity, UserActivity::class.java)
-                intent.putExtra("name", "show_user_info")
+            //}
+        } else {
+//            handler.post {
+                //toast("登录成功")
+                //val intent = Intent(activity, UserActivity::class.java)
+                //intent.putExtra("name", "show_user_info")
+                val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent)
                 activity!!.finish()
-            }
+           // }
         }
     }
 
-    private fun loginCheck(password:String, json:String):Boolean{
+    private fun loginCheck(password: String, json: String): Boolean {
         var user: User?
         if (json == "") {
             handler.post {
@@ -121,6 +128,7 @@ class LoginFragment : Fragment() {
         if (json == "2") {
             handler.post {
                 Toast.makeText(LitePalApplication.sContext, "账号或密码不正确", Toast.LENGTH_SHORT).show()
+                et_password.text.clear()
             }
             Log.e("Login Error", "账号或密码不正确")
             return false
@@ -128,7 +136,7 @@ class LoginFragment : Fragment() {
         var gson = Gson()
         user = gson.fromJson(json, User::class.java)
         println(json)
-        Log.d("loginCheck",user.password)
+        Log.d("loginCheck", user.password)
         println(password)
         if (user.password == password) {
             var loginedInfo = LitePal.findFirst<LoginedInfo>()
@@ -137,7 +145,7 @@ class LoginFragment : Fragment() {
             loginedInfo = LoginedInfo(
                     true, user.name, user.sex, user.phonenumber, user.password)
             loginedInfo.save()
-            Log.d("Login Succeed", "登录成功")
+            //Log.d("Login Succeed", "登录成功")
             return true
         }
         try {
