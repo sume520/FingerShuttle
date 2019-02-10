@@ -14,6 +14,8 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         val intent = intent
         var name = intent.getStringExtra("name")
+
+        //未登录时使name为”login“
         if(name==null) name="login"
         replaceFragment(name)
     }

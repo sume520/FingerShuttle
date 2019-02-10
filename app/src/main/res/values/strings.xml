@@ -6,4 +6,13 @@
     <string name="title_setting">设置</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lock">已锁车</string>
+    <string name="unlock">已解锁</string>
+    <string name="ring">正在响铃</string>
+    <string name="unring">无响铃</string>
+    <string name="resist">正在抗拒</string>
+    <string name="unresist">无抗拒</string>
+    <string name="alert">警报中</string>
+    <string name="unalert">无警报</string>
+
 </resources>

@@ -4,7 +4,7 @@ import org.litepal.annotation.Column
 import org.litepal.crud.LitePalSupport
 
 data class User(
-        @Column(unique = true, defaultValue = "unknown")
+        @Column(unique = true, defaultValue = "unknown",nullable = false)
         var account:String,
         var password: String,
         var name: String,

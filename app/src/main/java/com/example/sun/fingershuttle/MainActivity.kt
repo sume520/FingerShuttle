@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             window.statusBarColor = Color.TRANSPARENT
         }
         setViewPager()
+        //连接服务器
         ConnectUtil.connect()
     }
 

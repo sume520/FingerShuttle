@@ -2,11 +2,12 @@
 <litepal>
     <dbname value="Inno" />
 
-    <version value="3" />
+    <version value="5" />
 
     <list>
         <mapping class="com.example.sun.fingershuttle.DBTable.User" />
         <mapping class="com.example.sun.fingershuttle.DBTable.LoginedInfo" />
+        <mapping class="com.example.sun.fingershuttle.DBTable.CarState"/>
     </list>
 
 </litepal>

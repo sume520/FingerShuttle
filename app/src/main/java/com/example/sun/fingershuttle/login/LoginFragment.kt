@@ -14,6 +14,7 @@ import com.example.sun.fingershuttle.DBTable.LoginedInfo
 import com.example.sun.fingershuttle.DBTable.User
 import com.example.sun.fingershuttle.MainActivity
 import com.example.sun.fingershuttle.R
+import com.example.sun.fingershuttle.UserActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.greenrobot.eventbus.EventBus
@@ -66,28 +67,26 @@ class LoginFragment : Fragment() {
         login_bt_login.setOnClickListener {
             account = et_acount.text.toString()
             password = et_password.text.toString()
-            if (isLogined()) {
+            if (isLogined()) {//判断是否登录
                 toast("已登录")
                 activity!!.finish()
             }
-            if (account.isBlank()) {
+            if (account.isBlank()) {//判断账号输入是否为空
                 et_acount.text.clear()
                 et_password.text.clear()
                 toast("请输入账号")
-            } else if (password.isBlank()) {
+            } else if (password.isBlank()) {//判断密码输入是否为空
                 et_password.text.clear()
                 toast("请输入密码,密码不能为空")
-            } /*else if (Login(name, password) == true) {
-                toast("登录成功")
-                val intent = Intent(activity, UserActivity::class.java)
-                intent.putExtra("name", "show_user_info")
-                startActivity(intent)
-                activity!!.finish()
-            } else {
-                et_password.text.clear()
-                toast("登录失败，请检查账号或密码")
-            }*/
+            }
+            //利用事件总线发送登录数据并进行登录
             EventBus.getDefault().post(MessageEvent(account, password))
+        }
+
+        login_bt_register.setOnClickListener {
+            val intent=Intent(activity,UserActivity::class.java)
+            intent.putExtra("name","register")
+            startActivity(intent)
         }
     }
 
@@ -100,19 +99,12 @@ class LoginFragment : Fragment() {
 
         Log.d("Login", json)
         if (!loginCheck(password, json)) {
-            //handler.post {
                 toast("登录失败，请检查账号密码")
                 et_password.text.clear()
-            //}
         } else {
-//            handler.post {
-                //toast("登录成功")
-                //val intent = Intent(activity, UserActivity::class.java)
-                //intent.putExtra("name", "show_user_info")
                 val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent)
                 activity!!.finish()
-           // }
         }
     }
 
@@ -145,11 +137,10 @@ class LoginFragment : Fragment() {
             loginedInfo = LoginedInfo(
                     true, user.name, user.sex, user.phonenumber, user.password)
             loginedInfo.save()
-            //Log.d("Login Succeed", "登录成功")
             return true
         }
         try {
-            if (!LitePal.findAll<LoginedInfo>().isEmpty())
+            if (!LitePal.findAll<LoginedInfo>().isEmpty())//查询登录数据
                 LitePal.deleteAll<LoginedInfo>()
         } catch (e: LitePalSupportException) {
             Log.d("Login", "删除表LoginedInfo异常")
@@ -157,7 +148,7 @@ class LoginFragment : Fragment() {
         return false
     }
 
-    private fun isLogined(): Boolean {
+    private fun isLogined(): Boolean {//判断是否登录
         try {
             var lfs: List<LoginedInfo>
             if (!LitePal.findAll<LoginedInfo>().isEmpty()) {
@@ -167,22 +158,6 @@ class LoginFragment : Fragment() {
             }
         } catch (e: LitePalSupportException) {
             Log.d("isLogined", "查询数据库表“LoginedInfo”异常")
-        }
-        return false
-    }
-
-    fun logout(): Boolean {
-        if (!isLogined()) {
-            Log.d("logout", "账户未登录")
-            return false
-        }
-        try {//注销登录即把登录表中的数据删除
-            if (!LitePal.findAll<LoginedInfo>().isEmpty()) {
-                LitePal.deleteAll<LoginedInfo>()
-                return true
-            }
-        } catch (e: LitePalSupportException) {
-            Log.d("Login", "删除表LoginedInfo异常，注销失败")
         }
         return false
     }

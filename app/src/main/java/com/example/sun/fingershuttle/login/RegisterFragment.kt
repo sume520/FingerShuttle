@@ -30,8 +30,9 @@ class RegisterFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-       /* register_bt_reg.setOnClickListener {
-            var name = register_et_acount.text.toString()
+        register_bt_reg.setOnClickListener {
+            var account=register_et_acount.text.toString()
+            var name = register_et_name.text.toString()
             var pwd = register_et_password.text.toString()
             var rePwd = register_repeat_password.text.toString()
             var sex: Char
@@ -49,7 +50,7 @@ class RegisterFragment : Fragment() {
                 register_et_password.text.clear()
                 register_repeat_password.text.clear()
             } else {
-                if (Register.register(name, sex, phonenumber, pwd)) {
+                if (Register.register(account,pwd,name, sex, phonenumber)) {
                     toast("注册成功")
                     register_et_acount.text.clear()
                     register_et_password.text.clear()
@@ -59,6 +60,6 @@ class RegisterFragment : Fragment() {
                     rb_woman.isChecked = false
                 } else toast("注册失败,账号已存在")
             }
-        }*/
+        }
     }
 }

@@ -95,7 +95,7 @@ class Fragment_User : Fragment() {
             intent.putExtra("name", "repair_update")
             startActivity(intent)
         }
-        bt_logout.setOnClickListener {
+        bt_logout.setOnClickListener {//注销
             AlertDialog.Builder(context)
                     .setMessage("确定退出账号吗？")
                     .setTitle("注销")
