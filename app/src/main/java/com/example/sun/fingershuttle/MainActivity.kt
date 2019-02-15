@@ -1,13 +1,18 @@
 package com.example.sun.fingershuttle
 
+import android.annotation.TargetApi
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.transition.FragmentTransitionSupport
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import android.support.v4.app.NotificationCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -15,15 +20,17 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.example.sun.fingershuttle.DBTable.User
 import com.example.sun.fingershuttle.MinaUtil.ConnectUtil
 import com.example.sun.fingershuttle.R.id.menu_message
 import com.example.sun.fingershuttle.com.fragments.*
+import com.example.sun.fingershuttle.events.AlertEvent
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.toast
 import org.litepal.LitePal
-import org.litepal.extension.find
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -107,6 +114,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setViewPager()
         //连接服务器
         ConnectUtil.connect()
+
+        //创建通知渠道
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var channelId = "alert"
+            var channelName = "警报"
+            var importance = NotificationManager.IMPORTANCE_HIGH
+            createNotificationChannel(channelId, channelName, importance)
+        }
     }
 
 
@@ -224,4 +239,57 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter.addFragment(Fragment_Settings.newInstance())
         viewPager.adapter = adapter
     }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun newAlert(event: AlertEvent) {
+        var manager =
+                getSystemService(Context.NOTIFICATION_SERVICE)
+                        as NotificationManager
+        var resultIntent = Intent(this, MainActivity::class.java)
+        var pendingIntent = PendingIntent
+                .getActivity(
+                        this, 0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT)
+        var notification = NotificationCompat.Builder(this, "alert")
+                .setContentTitle("警报")
+                .setContentText("警报信息：${event.message}")
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(false)
+                .setSmallIcon(R.drawable.ic_alert)
+                .setContentIntent(pendingIntent)
+                .setLargeIcon(
+                        BitmapFactory
+                                .decodeResource(
+                                        resources, R.drawable.ic_alert))
+                .build()
+        //持续警报
+        notification.flags = Notification.FLAG_AUTO_CANCEL
+        manager.notify(1, notification)
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(
+            channelId: String,
+            channelName: String,
+            importance: Int
+    ) {//创建通知渠道
+        var channel = NotificationChannel(channelId, channelName, importance)
+        var notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE)
+                        as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+
+    }
+
 }

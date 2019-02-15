@@ -22,7 +22,7 @@ open class IoListener : IoServiceListener {
 
     @Throws(Exception::class)
     override fun serviceIdle(arg0: IoService, arg1: IdleStatus) {
-        Log.d("IoListener","服务器空闲中...")
+        Log.d("IoListener", "空闲中...")
     }
 
     @Throws(Exception::class)

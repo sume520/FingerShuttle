@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.sun.fingershuttle.MinaUtil.SessionManager
 import com.example.sun.fingershuttle.R
-import com.example.sun.fingershuttle.R.id.menu_message
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class Fragment_Home : Fragment(){
@@ -30,11 +29,12 @@ class Fragment_Home : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
         btn_ring.setOnClickListener {
             //ConnectUtil.sendMsg("#ring")
-            SessionManager.writeMsg("#ring")
+            SessionManager.writeMsg("1#ring")
         }
-
 
     }
 }

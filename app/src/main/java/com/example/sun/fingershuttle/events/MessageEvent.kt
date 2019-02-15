@@ -1,3 +1,3 @@
-package com.example.sun.fingershuttle.login
+package com.example.sun.fingershuttle.events
 
 data class MessageEvent(var account:String,var password:String)

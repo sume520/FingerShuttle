@@ -15,6 +15,7 @@ import com.example.sun.fingershuttle.DBTable.User
 import com.example.sun.fingershuttle.MainActivity
 import com.example.sun.fingershuttle.R
 import com.example.sun.fingershuttle.UserActivity
+import com.example.sun.fingershuttle.events.MessageEvent
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.greenrobot.eventbus.EventBus
@@ -84,8 +85,8 @@ class LoginFragment : Fragment() {
         }
 
         login_bt_register.setOnClickListener {
-            val intent=Intent(activity,UserActivity::class.java)
-            intent.putExtra("name","register")
+            val intent = Intent(activity, UserActivity::class.java)
+            intent.putExtra("name", "register")
             startActivity(intent)
         }
     }
@@ -99,12 +100,12 @@ class LoginFragment : Fragment() {
 
         Log.d("Login", json)
         if (!loginCheck(password, json)) {
-                toast("登录失败，请检查账号密码")
-                et_password.text.clear()
+            handler.post { toast("登录失败，请检查账号密码") }
+            et_password.text.clear()
         } else {
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-                activity!!.finish()
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            activity!!.finish()
         }
     }
 

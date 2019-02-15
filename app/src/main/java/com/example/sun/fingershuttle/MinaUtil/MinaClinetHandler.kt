@@ -1,8 +1,8 @@
 package com.example.sun.fingershuttle.MinaUtil
 
-import org.apache.mina.core.session.IoSession
-import org.apache.mina.core.session.IdleStatus
 import org.apache.mina.core.service.IoHandlerAdapter
+import org.apache.mina.core.session.IdleStatus
+import org.apache.mina.core.session.IoSession
 
 
 class MinaClientHandler : IoHandlerAdapter() {
@@ -21,7 +21,8 @@ class MinaClientHandler : IoHandlerAdapter() {
     @Throws(Exception::class)
     override fun messageReceived(session: IoSession?, message: Any?) {
         super.messageReceived(session, message)
-        println("接收到服务器发送的消息为：" + message!!.toString())
+        println("服务器消息：" + message!!.toString())
+        MessageUtil.messageParse(message.toString())
     }
 
     @Throws(Exception::class)
