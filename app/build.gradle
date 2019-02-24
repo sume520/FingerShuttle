@@ -84,4 +84,8 @@ dependencies {
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
+    //权限
+    implementation 'pub.devrel:easypermissions:1.0.1'
+
+
 }

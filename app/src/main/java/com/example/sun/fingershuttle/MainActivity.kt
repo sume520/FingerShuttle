@@ -1,5 +1,7 @@
 package com.example.sun.fingershuttle
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Notification
 import android.app.NotificationChannel
@@ -7,6 +9,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
@@ -20,6 +23,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.example.sun.fingershuttle.MinaUtil.ConnectUtil
 import com.example.sun.fingershuttle.R.id.menu_message
 import com.example.sun.fingershuttle.com.fragments.*
@@ -31,7 +35,9 @@ import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.toast
 import org.litepal.LitePal
+import pub.devrel.easypermissions.EasyPermissions
 
+private const val PERMISSION_REQUEST_READ_WRITE_EXTERNAL_STORAGE = 1
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -49,8 +55,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        var db = LitePal.getDatabase()
+        val db = LitePal.getDatabase()
         Log.d("MainAcrivity", db.isDatabaseIntegrityOk.toString())
+
+        //申请权限
+        EasyPermissions.requestPermissions(
+                this@MainActivity,
+                "没有相应权限软件将无法工作",
+                PERMISSION_REQUEST_READ_WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        )
         init()
     }
 
@@ -103,6 +118,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     private fun init() {
         //实现沉浸效果
         if (Build.VERSION.SDK_INT >= 21) {
@@ -117,9 +133,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         //创建通知渠道
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            var channelId = "alert"
-            var channelName = "警报"
-            var importance = NotificationManager.IMPORTANCE_HIGH
+            val channelId = "alert"
+            val channelName = "警报"
+            val importance = NotificationManager.IMPORTANCE_HIGH
             createNotificationChannel(channelId, channelName, importance)
         }
     }
@@ -220,7 +236,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.menu_message -> {
-                var intent= Intent(this,SettingActivity::class.java)
+                val intent= Intent(this,SettingActivity::class.java)
                 intent.putExtra("name","message")
                 startActivity(intent)
             }
@@ -230,7 +246,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
-        var adapter = ViewPagerAdapter(supportFragmentManager)
+        val adapter = ViewPagerAdapter(supportFragmentManager)
 
         adapter.addFragment(Fragment_Home.newInstance())
         adapter.addFragment(Fragment_Monitor.newInstance())
@@ -252,16 +268,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun newAlert(event: AlertEvent) {
-        var manager =
+        val manager =
                 getSystemService(Context.NOTIFICATION_SERVICE)
                         as NotificationManager
-        var resultIntent = Intent(this, MainActivity::class.java)
-        var pendingIntent = PendingIntent
+        val resultIntent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent
                 .getActivity(
                         this, 0,
                         resultIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT)
-        var notification = NotificationCompat.Builder(this, "alert")
+        val notification = NotificationCompat.Builder(this, "alert")
                 .setContentTitle("警报")
                 .setContentText("警报信息：${event.message}")
                 .setWhen(System.currentTimeMillis())
@@ -290,6 +306,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         as NotificationManager
         notificationManager.createNotificationChannel(channel)
 
+    }
+
+    //权限申请回调
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION_REQUEST_READ_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.size > 0) {
+                println(grantResults.size)
+                for (res in grantResults) {
+                    if (res == PackageManager.PERMISSION_GRANTED)
+                        Toast.makeText(this, "获取到权限", Toast.LENGTH_SHORT).show()
+                    else {
+                        Toast.makeText(this, "获取权限被拒绝，重启软件后可重新获取", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            return
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 }
