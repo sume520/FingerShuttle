@@ -11,6 +11,7 @@ class MinaClientHandler : IoHandlerAdapter() {
     override fun exceptionCaught(session: IoSession?, cause: Throwable) {
         super.exceptionCaught(session, cause)
         println("客服端与服务器连接发生异常")
+        ConnectUtil.reConnect()
     }
 
     @Throws(Exception::class)

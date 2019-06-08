@@ -5,7 +5,7 @@ import java.sql.ResultSet
 object DBHandler {
 
     fun query(sql: String): ResultSet? {
-        var rs: ResultSet? = null
+        var rs: ResultSet?
         rs = DBUtil.execQuerySql(sql)
         return rs
     }

@@ -58,11 +58,16 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (isLogined()) {//判断是否登录，若已经登录则跳过登录界面
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-            activity!!.finish()
-        }
+        /* if (isLogined()) {//判断是否登录，若已经登录则跳过登录界面
+             val intent = Intent(activity, MainActivity::class.java)
+             startActivity(intent)
+             activity!!.finish()
+         }*/
+        //强行登陆
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
+        activity!!.finish()
+
         var account: String
         var password: String
         login_bt_login.setOnClickListener {
@@ -93,10 +98,10 @@ class LoginFragment : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.ASYNC)
     fun Login(messageEvent: MessageEvent) {
-        var account = messageEvent.account
-        var password = messageEvent.password
-        var url = "http://120.78.159.172:8008/Login_RegServer/Login?account=$account&password=$password"
-        var json = URL(url).readText()
+        val account = messageEvent.account
+        val password = messageEvent.password
+        val url = "http://120.78.159.172:8008/Login_RegServer/Login?account=$account&password=$password"
+        val json = URL(url).readText()
 
         Log.d("Login", json)
         if (!loginCheck(password, json)) {
@@ -110,7 +115,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginCheck(password: String, json: String): Boolean {
-        var user: User?
+        val user: User?
         if (json == "") {
             handler.post {
                 Toast.makeText(LitePalApplication.sContext, "登录错误", Toast.LENGTH_SHORT).show()
@@ -126,7 +131,7 @@ class LoginFragment : Fragment() {
             Log.e("Login Error", "账号或密码不正确")
             return false
         }
-        var gson = Gson()
+        val gson = Gson()
         user = gson.fromJson(json, User::class.java)
         println(json)
         Log.d("loginCheck", user.password)
@@ -151,10 +156,10 @@ class LoginFragment : Fragment() {
 
     private fun isLogined(): Boolean {//判断是否登录
         try {
-            var lfs: List<LoginedInfo>
+            val lfs: List<LoginedInfo>
             if (!LitePal.findAll<LoginedInfo>().isEmpty()) {
                 lfs = LitePal.findAll()
-                var lf = lfs[0]
+                val lf = lfs[0]
                 return lf.status
             }
         } catch (e: LitePalSupportException) {

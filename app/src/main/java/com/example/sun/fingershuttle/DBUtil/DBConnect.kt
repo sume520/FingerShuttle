@@ -1,14 +1,9 @@
 package com.example.sun.fingershuttle.DBUtil
 
-import android.os.AsyncTask
 import android.util.Log
+import com.mysql.jdbc.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
-
-import com.mysql.jdbc.Connection
-import java.util.concurrent.Callable
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 
 object DBConnect {
 
@@ -24,7 +19,6 @@ object DBConnect {
         //连接数据库
         var con: Connection? = null
         val uri = "jdbc:mysql://120.78.159.172:3306/" + database + "?&useSSL=true&characterEncoding=utf-8"
-        var threadPool = Executors.newCachedThreadPool()
 
         try {
             con = DriverManager.getConnection(uri, username, pwd) as Connection

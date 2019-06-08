@@ -9,10 +9,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sun.fingershuttle.login.Login
-
 import com.example.sun.fingershuttle.R
 import com.example.sun.fingershuttle.UserActivity
+import com.example.sun.fingershuttle.login.Login
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -83,6 +82,8 @@ class Fragment_User : Fragment() {
         bt_bike_current_location.setOnClickListener {
             val intent = Intent(activity, UserActivity::class.java)
             intent.putExtra("name", "bike_location")
+            intent.putExtra("latitude", 0.0)
+            intent.putExtra("longitude", 0.0)
             startActivity(intent)
         }
         bt_navigation.setOnClickListener {

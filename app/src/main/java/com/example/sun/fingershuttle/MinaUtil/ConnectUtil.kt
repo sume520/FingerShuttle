@@ -18,8 +18,8 @@ object ConnectUtil : Runnable {
     private lateinit var address: InetSocketAddress
     private var session: IoSession? = null
     private lateinit var future: ConnectFuture
-    //private const val IP = "120.78.159.172"
-    private const val IP = "192.168.0.100"
+    private const val IP = "120.78.159.172"
+    //private const val IP = "192.168.123.96"
     private const val PORT = 3344
 
     override fun run() {
@@ -36,32 +36,8 @@ object ConnectUtil : Runnable {
             override fun sessionDestroyed(arg0: IoSession) {
                 super.sessionDestroyed(arg0)
                 Log.d("===============", "连接断开，尝试重连...")
-                try {
-                    val failCount = 0
-                    while (true) {
-                        //五秒一次重连
-                        Thread.sleep(5000)
-                        println((connector
-                                .defaultRemoteAddress as InetSocketAddress)
-                                .address
-                                .hostAddress)
-                        future = connector.connect()
-                        future.awaitUninterruptibly()
-                        session = future.session
-                        if (session != null && session!!.isConnected()) {
-                            println("断线重连["
-                                    + (session!!.getRemoteAddress() as InetSocketAddress).address.hostAddress
-                                    + ":" + (session!!.getRemoteAddress() as InetSocketAddress).port + "]成功")
-                            //session!!.write("start")
-                            break
-                        } else {
-                            println("断线重连失败--->" + failCount + "次")
-                        }
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+            reConnect()
+        }
 
         })
         Log.i("==================", "准备连接服务器")
@@ -76,6 +52,39 @@ object ConnectUtil : Runnable {
             Log.i("================", "连接服务器成功")
         } catch (e: Exception) {
             Log.e("================", "连接服务器失败")
+        }
+    }
+
+    //重连
+    fun reConnect() {
+        try {
+            val failCount = 0
+            while (true) {
+                //五秒一次重连
+                Thread.sleep(5000)
+                println("服务器IP：${(connector
+                        .defaultRemoteAddress as InetSocketAddress)
+                        .address
+                        .hostAddress}")
+                future = connector.connect()
+                future.awaitUninterruptibly()
+                session = future.session
+                if (session != null && session!!.isConnected()) {
+                    println("断线重连["
+                            + (session!!.getRemoteAddress() as InetSocketAddress).address.hostAddress
+                            + ":" + (session!!.getRemoteAddress() as InetSocketAddress).port + "]成功")
+                    //session!!.write("start")
+                    handler.post {
+                        SessionManager.session = session
+                        SessionManager.writeMsg("0#start")
+                    }
+                    break
+                } else {
+                    println("断线重连失败--->" + failCount + "次")
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

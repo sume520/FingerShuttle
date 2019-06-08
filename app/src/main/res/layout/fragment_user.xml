@@ -31,16 +31,19 @@
             android:id="@+id/bt_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:text="注销" />
 
         <Button
             android:id="@+id/bt_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:text="注册" />
 
         <Button
             android:id="@+id/bt_show_user_info"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="显示用户信息" />
@@ -58,18 +61,21 @@
 
         <Button
             android:id="@+id/bt_total_ditance"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="总行程" />
 
         <Button
             android:id="@+id/bt_find_path"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="查找行程" />
 
         <Button
             android:id="@+id/bt_note"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="备忘录" />
@@ -87,24 +93,28 @@
 
         <Button
             android:id="@+id/bt_user_current_location"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="用户当前所在位置" />
 
         <Button
             android:id="@+id/bt_bike_current_location"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="用户车辆所在位置" />
 
         <Button
             android:id="@+id/bt_navigation"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="导航路线" />
 
         <Button
             android:id="@+id/bt_repair_update"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="指梭附近维修点及升级点"

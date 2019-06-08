@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sun.fingershuttle.DBTable.LoginedInfo
-import com.example.sun.fingershuttle.login.Login
-
 import com.example.sun.fingershuttle.R
+import com.example.sun.fingershuttle.login.Login
 import kotlinx.android.synthetic.main.fragment_show_user_info.*
 import org.litepal.LitePal
 import org.litepal.extension.findAll
@@ -37,7 +36,7 @@ class ShowUserInfoFragment : Fragment() {
 
     private fun updateData() {
         if (Login.isLogined()) {
-            var userinfo = LitePal.findAll<LoginedInfo>().first()
+            val userinfo = LitePal.findAll<LoginedInfo>().first()
             tv_username.text = userinfo.name
             tv_sex.text = userinfo.sex.toString()
             tv_phonenumber.text = userinfo.phonenumber

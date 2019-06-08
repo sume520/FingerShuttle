@@ -1,6 +1,7 @@
 package com.example.sun.fingershuttle.com.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -12,6 +13,7 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
+import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MarkerOptions
 import com.example.sun.fingershuttle.R
@@ -27,6 +29,14 @@ class UserLocationFragment : Fragment() {
     //声明mLocationOption对象
     var mLocationOption: AMapLocationClientOption? = null
 
+    var latBias = 0.0
+    var longBias = 0.0
+
+    fun setBias(lat: Double, long: Double) {
+        latBias = lat
+        longBias = long
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -36,6 +46,8 @@ class UserLocationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         user_map.onCreate(savedInstanceState)
+
+        val intent = Intent()
 
         //初始化定位
         mlocationClient = AMapLocationClient(context);
@@ -56,8 +68,8 @@ class UserLocationFragment : Fragment() {
             if (amapLocation.errorCode == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.locationType//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.latitude//获取纬度
-                amapLocation.longitude//获取经度
+                /*amapLocation.latitude//获取纬度
+                amapLocation.longitude//获取经度*/
                 amapLocation.accuracy//获取精度信息
                 val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                 val date = Date(amapLocation.time)
@@ -72,21 +84,32 @@ class UserLocationFragment : Fragment() {
                 amapLocation.cityCode//城市编码
                 amapLocation.adCode//地区编码
                 amapLocation.aoiName//获取当前定位点的AOI信息
-                val lat = amapLocation.latitude//获取经纬度
-                val lon = amapLocation.longitude
+                var lat = amapLocation.latitude//获取经纬度
+                var lon = amapLocation.longitude
+                //加上偏移量，模拟车辆位置
+                lat += latBias
+                lon += longBias
+
                 Log.i("==============", "lat : $lat lon : $lon")
                 Log.i("==============", "Country : " + amapLocation.country + " province : " + amapLocation.province + " City : " + amapLocation.city + " District : " + amapLocation.district)
 
                 // 设置当前地图显示为当前位置
-                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 19f))
-                val markerOptions = MarkerOptions()
-                markerOptions.position(LatLng(lat, lon))
-                markerOptions.title("当前位置")
-                markerOptions.visible(true)
-                /*val bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(resources, R.mipmap.locate))
-                markerOptions.icon(bitmapDescriptor)*/
+                /* aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 19f))
+                 val markerOptions = MarkerOptions()
+                 markerOptions.position(LatLng(lat, lon))
+                 markerOptions.title("当前位置")
+                 markerOptions.visible(true)
+                 *//*val bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(resources, R.mipmap.locate))
+                markerOptions.icon(bitmapDescriptor)*//*
                 aMap.clear()
-                aMap.addMarker(markerOptions)
+                aMap.addMarker(markerOptions)*/
+                addMarker(LatLng(lat, lon), "当前位置")
+
+                //添加车辆位置
+                if (latBias != 0.0 && longBias != 0.0) {
+                    addMarker((LatLng(lat + latBias, lon + longBias)), "车辆位置", true)
+                }
+
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError", "location Error, ErrCode:"
@@ -94,6 +117,22 @@ class UserLocationFragment : Fragment() {
                         + amapLocation.errorInfo)
             }
         }
+    }
+
+    private fun addMarker(latLng: LatLng, title: String, isBike: Boolean = false) {
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19f))
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latLng)
+        markerOptions.title("当前位置")
+        markerOptions.visible(true)
+        Log.i("addMaker", "add Maker")
+        //if(isBike){
+        Log.i("addMaker", "alternate icon")
+        val bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.ic_bike_blue_24dp)
+        markerOptions.icon(bitmapDescriptor)
+        //}
+        //aMap.clear()
+        aMap.addMarker(markerOptions)
     }
 
     private fun setUpMap() {
@@ -122,7 +161,6 @@ class UserLocationFragment : Fragment() {
 
 
     companion object {
-
         @JvmStatic
         fun newInstance() =
                 UserLocationFragment()

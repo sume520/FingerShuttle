@@ -2,7 +2,6 @@ package com.example.sun.fingershuttle.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.example.sun.fingershuttle.utils.secToTime
 
 class CarStateModel : ViewModel() {
@@ -18,11 +17,9 @@ class CarStateModel : ViewModel() {
     var driveTime = MutableLiveData<String>()
         get() {
             field.value = secToTime(power.value!! * 200)
-            //Log.i("============",field.value)
             return field
         }
     var power = MutableLiveData<Int>()
-
 
     fun culDriveTime(time: Int): String {
         return secToTime(time * 200)

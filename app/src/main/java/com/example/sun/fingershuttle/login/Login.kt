@@ -19,19 +19,18 @@ object Login {
     private var json = ""
 
     fun checkAccountAndPwd(account: String, pwd: String): Boolean {
-        var user: User?
-        //var json=""
-        var url = "http://120.78.159.172:8008/Login_RegServer/Login"
-        var client = OkHttpClient()
-        var body = FormBody.Builder()
+        val user: User?
+        val url = "http://120.78.159.172:8008/Login_RegServer/Login"
+        val client = OkHttpClient()
+        val body = FormBody.Builder()
                 .add("account", "sume520")
                 .add("password", "abc123")
                 .build()
-        var request = Request.Builder()
+        val request = Request.Builder()
                 .url(url)
                 .post(body)
                 .build()
-        var call = client.newCall(request)
+        val call = client.newCall(request)
         call.enqueue(object : okhttp3.Callback {
             override fun onFailure(call: Call, e: IOException) {
                 println("获取数据出错")
@@ -39,7 +38,7 @@ object Login {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                var msg = handler.obtainMessage()
+                val msg = handler.obtainMessage()
                 //msg.what = 0x123
                 msg.obj = response.body()!!.string()
                 println("接收数据：${msg.obj}")
@@ -62,9 +61,9 @@ object Login {
             Log.e("Login Error", "账号或密码不正确")
             return false
         }
-        var gson = Gson()
+        val gson = Gson()
         user = gson.fromJson(json, User::class.java)
-//        Log.d("User password",user.password)
+
         if (user.password == pwd) {
             var loginedInfo = LitePal.findFirst<LoginedInfo>()
             if (loginedInfo != null)
@@ -86,11 +85,11 @@ object Login {
 
     fun isLogined(): Boolean {
         try {
-            var lfs: List<LoginedInfo>
+            val lfs: List<LoginedInfo>
             if (!LitePal.findAll<LoginedInfo>().isEmpty()) {
                 lfs = LitePal.findAll()
-                var lf = lfs[0]
-                return lf.status == true
+                val lf = lfs[0]
+                return lf.status
             }
         } catch (e: LitePalSupportException) {
             Log.d("isLogined", "查询数据库表“LoginedInfo”异常")
@@ -115,7 +114,7 @@ object Login {
     }
 
     internal val handler = Handler(Handler.Callback { msg ->
-        var message = msg!!.obj as String
+        val message = msg!!.obj as String
         json = message
         Log.d("MyHandler", message)
         Toast.makeText(LitePalApplication.sContext, json, Toast.LENGTH_SHORT).show()
